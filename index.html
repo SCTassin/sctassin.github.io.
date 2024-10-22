@@ -88,10 +88,12 @@
                 alexaAlarmTime = subtractMinutes(pickupTimeDate, 82);
             }
 
-            document.getElementById('leave-home').innerHTML = "Leave Home At: " + formatTime(leaveHomeTime);
-            document.getElementById('leave-room').innerHTML = "Leave Room At: " + formatTime(leaveRoomTime);
+           
             document.getElementById('phone-alarm').innerHTML = "Set Phone Alarm At: " + formatTime(phoneAlarmTime);
             document.getElementById('alexa-alarm').innerHTML = "Set Alexa Alarm At: " + formatTime(alexaAlarmTime);
+             
+            document.getElementById('leave-room').innerHTML = "Leave Room At: " + formatTime(leaveRoomTime);
+            document.getElementById('leave-home').innerHTML = "Leave Home At: " + formatTime(leaveHomeTime);
 
             document.getElementById('output').style.display = "block";
         }
