@@ -41,10 +41,10 @@
     </select>
 
     <div id="output" style="display:none;">
-        <p id="leave-home"></p>
-        <p id="leave-room"></p>
-        <p id="phone-alarm"></p>
         <p id="alexa-alarm"></p>
+        <p id="phone-alarm"></p>
+        <p id="leave-room"></p>
+        <p id="leave-home"></p>
     </div>
 
     <button id="submit-button" type="button">Submit</button>
@@ -88,10 +88,8 @@
                 alexaAlarmTime = subtractMinutes(pickupTimeDate, 82);
             }
 
-           
-            document.getElementById('phone-alarm').innerHTML = "Set Phone Alarm At: " + formatTime(phoneAlarmTime);
             document.getElementById('alexa-alarm').innerHTML = "Set Alexa Alarm At: " + formatTime(alexaAlarmTime);
-             
+            document.getElementById('phone-alarm').innerHTML = "Set Phone Alarm At: " + formatTime(phoneAlarmTime);
             document.getElementById('leave-room').innerHTML = "Leave Room At: " + formatTime(leaveRoomTime);
             document.getElementById('leave-home').innerHTML = "Leave Home At: " + formatTime(leaveHomeTime);
 
