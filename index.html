@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Abby's Morning Times</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input, select {
+            margin-bottom: 20px;
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Abby's Morning Times</h1>
+
+    <label for="pickup-time">MetroLift Kroger Pickup Time:</label>
+    <input type="time" id="pickup-time" name="pickup-time">
+
+    <label for="do-the-dogs">Do The Dogs:</label>
+    <select id="do-the-dogs" name="do-the-dogs">
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+    </select>
+
+    <div id="output" style="display:none;">
+        <p id="leave-home"></p>
+        <p id="leave-room"></p>
+        <p id="phone-alarm"></p>
+        <p id="alexa-alarm"></p>
+    </div>
+
+    <button id="submit-button" type="button">Submit</button>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        function calculateTimes() {
+            var pickupTime = document.getElementById('pickup-time').value;
+            var doTheDogs = document.getElementById('do-the-dogs').value;
+
+            if (!pickupTime) {
+                alert("Please enter the MetroLift Kroger Pickup Time.");
+                return;
+            }
+
+            // Parse the pickup time properly for compatibility
+            var timeParts = pickupTime.split(':');
+            var hours = parseInt(timeParts[0], 10);
+            var minutes = parseInt(timeParts[1], 10);
+
+            var pickupTimeDate = new Date();
+            pickupTimeDate.setHours(hours);
+            pickupTimeDate.setMinutes(minutes);
+            pickupTimeDate.setSeconds(0);
+
+            function subtractMinutes(time, minutesToSubtract) {
+                var newTime = new Date(time.getTime() - minutesToSubtract * 60000);
+                return newTime;
+            }
+
+            var leaveHomeTime = subtractMinutes(pickupTimeDate, 25);
+            var leaveRoomTime = subtractMinutes(pickupTimeDate, 30);
+            var phoneAlarmTime, alexaAlarmTime;
+
+            if (doTheDogs === 'No') {
+                phoneAlarmTime = subtractMinutes(pickupTimeDate, 75);
+                alexaAlarmTime = subtractMinutes(pickupTimeDate, 67);
+            } else {
+                phoneAlarmTime = subtractMinutes(pickupTimeDate, 90);
+                alexaAlarmTime = subtractMinutes(pickupTimeDate, 82);
+            }
+
+            document.getElementById('leave-home').innerHTML = "Leave Home At: " + formatTime(leaveHomeTime);
+            document.getElementById('leave-room').innerHTML = "Leave Room At: " + formatTime(leaveRoomTime);
+            document.getElementById('phone-alarm').innerHTML = "Set Phone Alarm At: " + formatTime(phoneAlarmTime);
+            document.getElementById('alexa-alarm').innerHTML = "Set Alexa Alarm At: " + formatTime(alexaAlarmTime);
+
+            document.getElementById('output').style.display = "block";
+        }
+
+        function formatTime(date) {
+            var hours = date.getHours().toString().padStart(2, '0');
+            var minutes = date.getMinutes().toString().padStart(2, '0');
+            return hours + ':' + minutes;
+        }
+
+        document.getElementById('submit-button').addEventListener('click', calculateTimes);
+    });
+</script>
+
+</body>
+</html>
