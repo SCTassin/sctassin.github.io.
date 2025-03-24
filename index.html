@@ -76,16 +76,16 @@
                 return newTime;
             }
 
-            var leaveHomeTime = subtractMinutes(pickupTimeDate, 25);
-            var leaveRoomTime = subtractMinutes(pickupTimeDate, 30);
+            var leaveHomeTime = subtractMinutes(pickupTimeDate, 30);
+            var leaveRoomTime = subtractMinutes(pickupTimeDate, 35);
             var phoneAlarmTime, alexaAlarmTime;
 
             if (doTheDogs === 'No') {
-                phoneAlarmTime = subtractMinutes(pickupTimeDate, 75);
-                alexaAlarmTime = subtractMinutes(pickupTimeDate, 67);
+                phoneAlarmTime = subtractMinutes(pickupTimeDate, 80);
+                alexaAlarmTime = subtractMinutes(pickupTimeDate, 72);
             } else {
-                phoneAlarmTime = subtractMinutes(pickupTimeDate, 90);
-                alexaAlarmTime = subtractMinutes(pickupTimeDate, 82);
+                phoneAlarmTime = subtractMinutes(pickupTimeDate, 95);
+                alexaAlarmTime = subtractMinutes(pickupTimeDate, 87);
             }
 
             document.getElementById('alexa-alarm').innerHTML = "Set Alexa Alarm At: " + formatTime(alexaAlarmTime);
